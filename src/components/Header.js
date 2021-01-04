@@ -22,22 +22,36 @@ const Header = () => {
       a.push({
         name: album.name,
         releaseDate: album.release_date,
+        photo: album.images[0].url,
       })
     );
+    console.log(a);
     setAlbums(a);
   };
 
   return (
     <>
       {/* <button onClick={getAlbums}>Get Albums</button> */}
-      <Button variant="success" onClick={getAlbums}>
-        Get Albums
-      </Button>
-      {albums.map((album, idx) => (
-        <Card key={idx}>
-          {album.name} {album.releaseDate}
-        </Card>
-      ))}
+      <div className="p-2">
+        <Button variant="success" className="btn-block" onClick={getAlbums}>
+          Get Albums
+        </Button>
+      </div>
+      <div>
+        {albums.map((album, idx) => (
+          <Card
+            key={idx}
+            className="m-1 d-inline-block"
+            style={{ width: "32vw" }}
+          >
+            <Card.Img variant="top" src={album.photo} />
+            <Card.Body>
+              <Card.Title>{album.name}</Card.Title>
+              <Card.Text>Release Date: {album.releaseDate}</Card.Text>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
     </>
   );
 };
